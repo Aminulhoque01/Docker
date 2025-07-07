@@ -8,11 +8,12 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Aminulhoque01 <Aminuhoque53@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "yarn": "^1.22.22"
-  }
+  },
+  "repository": "https://github.com/Aminulhoque01/Docker.git"
 }
