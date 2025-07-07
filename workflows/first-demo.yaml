@@ -1,67 +1,65 @@
-on:
-  push:
-    branches:
-      - main
-jobs:
-  demo-job:
-    runs-on: ubuntu-latest
-
-    steps:
-      - run: echo "Achtion started"
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Run a one-line script
-        run: echo "hello, world"
-      - name: Run a multiline script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-      - name: List files
-        run: ls ${{github.workspace }}
-      - name: Print github context
-        env:
-          GITHUB_CONTEXT: ${{toJson(github)}}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Action complited
-        run: echo "Action completed"
-
-
-        
-# name: CI/CD Pipeline with Docker
-
 # on:
 #   push:
 #     branches:
 #       - main
-#   pull_request:
-#     branches:
-#       - main
-
 # jobs:
-#   build:
+#   demo-job:
 #     runs-on: ubuntu-latest
 
 #     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-
-#       - name: Set up Docker Buildx
-#         uses: docker/setup-buildx-action@v1
-
-#       - name: Build Docker image
+#       - run: echo "Achtion started"
+#       - name: Checkout
+#         uses: actions/checkout@v4
+#       - name: Run a one-line script
+#         run: echo "hello, world"
+#       - name: Run a multiline script
 #         run: |
-#           docker build -t my-app .
+#           echo Add other actions to build,
+#           echo test, and deploy your project.
+#       - name: List files
+#         run: ls ${{github.workspace }}
+#       - name: Print github context
+#         env:
+#           GITHUB_CONTEXT: ${{toJson(github)}}
+#         run: echo "$GITHUB_CONTEXT"
+#       - name: Action complited
+#         run: echo "Action completed"
 
-#       - name: Run tests inside Docker container
-#         run: |
-#           docker run my-app npm test
+# name: CI/CD Pipeline with Docker
 
-#       - name: Push Docker image to DockerHub
-#         run: |
-#           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-#           docker tag my-app:latest ${{ secrets.DOCKER_USERNAME }}/my-app:latest
-#           docker push ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-#       - name: Deploy to Server
-#         run: |
-#           ssh user@yourserver.com 'docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:latest && docker-compose up -d'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Docker image
+        run: |
+          docker build -t my-app .
+
+      - name: Run tests inside Docker container
+        run: |
+          docker run my-app npm test
+
+      - name: Push Docker image to DockerHub
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          docker tag my-app:latest ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-app:latest
+
+      - name: Deploy to Server
+        run: |
+          ssh user@yourserver.com 'docker pull ${{ secrets.DOCKER_USERNAME }}/my-app:latest && docker-compose up -d'
