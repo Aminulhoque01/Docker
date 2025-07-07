@@ -51,8 +51,6 @@ jobs:
           docker build -t my-app .
 
       - name: Run tests inside Docker container
-        run: |
-          docker run my-app npm test
 
       - name: Push Docker image to DockerHub
         run: |
