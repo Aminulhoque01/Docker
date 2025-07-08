@@ -24,6 +24,8 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
       - name: Action complited
         run: echo "Action completed"
+
+        
 # name: CI/CD Pipeline with Docker
 
 # on:
