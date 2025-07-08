@@ -3,7 +3,7 @@ name: publish-docker-Image
 on:
   push:
     branches:
-      - main # Your branch here if needed
+      - main
 
 jobs:
   push-to-registry:
@@ -31,3 +31,6 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
+
+          
+           # tags: ${{ steps.meta.outputs.tags }}
