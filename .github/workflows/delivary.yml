@@ -27,4 +27,5 @@ jobs:
           context: .
           file: ./Dokcerfile
           push: true
-          tags: ${{setps.meta.outputs.tags}}
+
+          tags: ${{ steps.meta.outputs.tags }}
